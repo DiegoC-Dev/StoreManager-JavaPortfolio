@@ -1,4 +1,4 @@
-# StoreManager-JavaPortfolio
+# Store Manager Java-Portfolio
 A store management application that allows handling CRUD operations for products, along with a list of orders that tracks customers and the products they have requested. The app features a simple but harmonious graphical interface, where products are displayed as cards showing their name, price, and a brief description.
 
 ## Author
