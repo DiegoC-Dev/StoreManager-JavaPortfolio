@@ -23,8 +23,9 @@ public final class WindowUtils {
 	 */
 	public static void configureAdaptiveBounds(JFrame frame, int preferredWidth, int preferredHeight) {
 		Rectangle maxBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		int width = Math.min(preferredWidth, (int) (maxBounds.width * MAX_SCREEN_RATIO));
-		int height = Math.min(preferredHeight, (int) (maxBounds.height * MAX_SCREEN_RATIO));
+		double ratio = maxBounds.height < 680 ? 1.0 : MAX_SCREEN_RATIO;
+		int width = Math.min(preferredWidth, (int) (maxBounds.width * ratio));
+		int height = Math.min(preferredHeight, (int) (maxBounds.height * ratio));
 		frame.setSize(width, height);
 		frame.setMinimumSize(new Dimension(Math.min(MIN_WIDTH, width), Math.min(MIN_HEIGHT, height)));
 		frame.setLocationRelativeTo(null);

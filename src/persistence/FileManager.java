@@ -1,5 +1,6 @@
 package persistence;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,18 +42,42 @@ public class FileManager {/////agregar libreria json-simple-1.1.1.jar
 			list.add(jsonProfile);
 		}
 		jsonfile.put(TAG_LIST, list);
-		try (FileWriter file = new FileWriter(DB_PATH, false)) {
+		File outFile = new File(DB_PATH);
+		File parent = outFile.getParentFile();
+		if (parent != null && !parent.exists()) {
+			parent.mkdirs();
+		}
+		try (FileWriter file = new FileWriter(outFile, false)) {
 			file.write(jsonfile.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Resolves a relative asset/data path with a /app/ fallback for CheerpJ in browser.
+	 */
+	public static String resolvePath(String path) {
+		if (path == null) {
+			return null;
+		}
+		File file = new File(path);
+		if (file.exists()) {
+			return file.getPath();
+		}
+		String normalized = path.startsWith("./") ? path.substring(2) : path;
+		File appFile = new File("/app/" + normalized);
+		if (appFile.exists()) {
+			return appFile.getPath();
+		}
+		return path;
+	}
+
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Product> read() {
 		ArrayList<Product> list = new ArrayList<Product>();
 		JSONParser parser = new JSONParser();
-		try (Reader reader = new FileReader(DB_PATH)) {
+		try (Reader reader = new FileReader(resolvePath(DB_PATH))) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			JSONArray products = (JSONArray) jsonObject.get(TAG_LIST);
 			Iterator<JSONObject> iterator = products.iterator();

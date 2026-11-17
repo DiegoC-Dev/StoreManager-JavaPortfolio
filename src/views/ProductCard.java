@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import models.Product;
+import persistence.FileManager;
 import presenters.Event;
 
 public class ProductCard extends JPanel{
@@ -61,7 +62,7 @@ public class ProductCard extends JPanel{
 		JPanel centralPanel = new JPanel(new GridLayout(2, 1));
 
 		JLabel lbImg = new JLabel();
-		Image image= new ImageIcon(product.getImgPath()).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+		Image image= new ImageIcon(FileManager.resolvePath(product.getImgPath())).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 		lbImg.setIcon(new ImageIcon(image));
 		lbImg.setHorizontalAlignment(SwingConstants.CENTER);
 		centralPanel.add(lbImg);

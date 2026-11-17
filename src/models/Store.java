@@ -32,8 +32,10 @@ public class Store {
 		clientList.add(new Client(5, "Hugo"));
 		
 		orderList = new ArrayList<Order>();
-		orderList.add(new Order(1, productList.get(0),
-				clientList.get(0)));
+		if (!productList.isEmpty() && !clientList.isEmpty()) {
+			orderList.add(new Order(1, productList.get(0),
+					clientList.get(0)));
+		}
 	}
 	
 	public void setProduct(Product product,int index) {
