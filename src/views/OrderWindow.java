@@ -14,13 +14,13 @@ public class OrderWindow extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private static final String ICON_PATH = "/img/icon.png";
 	private static final String TITLE = "Ordenes";
-	public static final int WIDTH = 700;
-	public static final int HEIGHT = 600;
+	public static final int WIDTH = 600;
+	public static final int HEIGHT = 480;
 	private OrderPanel orderPanel;
 	
 	public OrderWindow(ActionListener listener) throws IOException {
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setTitle(TITLE);
 //		setIconImage(new ImageIcon(getClass().getResource(ICON_PATH)).getImage());
 		
