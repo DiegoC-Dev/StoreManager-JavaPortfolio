@@ -15,13 +15,12 @@ public class OrderWindow extends JFrame{
 	private static final String ICON_PATH = "/img/icon.png";
 	private static final String TITLE = "Ordenes";
 	public static final int WIDTH = 700;
-	public static final int HEIGHT = 700;
+	public static final int HEIGHT = 600;
 	private OrderPanel orderPanel;
 	
 	public OrderWindow(ActionListener listener) throws IOException {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(WIDTH, HEIGHT);
 		setTitle(TITLE);
 //		setIconImage(new ImageIcon(getClass().getResource(ICON_PATH)).getImage());
 		
@@ -30,6 +29,7 @@ public class OrderWindow extends JFrame{
 		orderPanel = new OrderPanel(listener);
 //		add(orderPanel, BorderLayout.CENTER);
 		add(orderPanel);
+		WindowUtils.configureAdaptiveBounds(this, WIDTH, HEIGHT);
 	}
 	public void repaintTable(ArrayList<Order> userList) {
 		orderPanel.repaintTable(userList);
